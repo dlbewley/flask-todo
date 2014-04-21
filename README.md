@@ -22,6 +22,7 @@ Readers' Digest Summary
  pip install flask flask-wtf flask-babel markdown flup 
  vim ~/src/openshift/flask/setup.py
  # update install_requires to include flask-wtf flask-babel markdown flup
+ #  install_requires=['Flask>=0.7.2', 'MarkupSafe', 'flask-wtf', 'flask-babel', 'markdown', 'flup'],
  echo 'venv/' >> ~/src/flask/.gitignore
  mkdir -p ~/src/openshift/flask/wsgi/app/{static,templates}
  mkdir -p ~/src/openshift/flask/wsgi/tmp
@@ -43,14 +44,15 @@ def index():
     return "Hello, World!"
 EOF
 
-* Update  ~/src/openshift/flask/wsgi/application
-
-* Create run.py
+* Create run.py to spawn hello world app
  cat <<EOF >  ~/src/openshift/flask/wsgi/run.py
 from app import app
 if __name__ == "__main__":
     app.run(debug = True) #We will set debug false in production 
 EOF
+
+* Update  ~/src/openshift/flask/wsgi/application
+
 
 Test It
 -------
