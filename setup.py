@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name='Flask',
+setup(name='FlaskTest',
       version='1.0',
       description='Flask Testing OpenShift App',
       author='Dale Bewley',
