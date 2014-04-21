@@ -1,10 +1,10 @@
 from setuptools import setup
 
-setup(name='YourAppName',
+setup(name='Flask',
       version='1.0',
-      description='OpenShift App',
-      author='Your Name',
-      author_email='example@example.com',
+      description='Flask Testing OpenShift App',
+      author='Dale Bewley',
+      author_email='dale@bewley.net',
       url='http://www.python.org/sigs/distutils-sig/',
-      install_requires=['Flask>=0.7.2', 'MarkupSafe'],
+      install_requires=['Flask>=0.7.2', 'MarkupSafe', 'flask-wtf', 'flask-babel', 'markdown', 'flup'],
      )
