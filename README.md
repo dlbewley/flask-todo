@@ -65,6 +65,17 @@ Push It
  git add .
 
 
+Phase Two
+=========
+
+ cd ~/src/openshift/flask
+ #update wsgi/run.py
+ #ceate templates/base.html
+ #ceate templates/index.html
+
+
+
+
 Flask on OpenShift
 ==================
 
