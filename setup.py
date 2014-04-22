@@ -1,10 +1,10 @@
 from setuptools import setup
 
-setup(name='FlaskTest',
+setup(name='TodoApp',
       version='1.0',
-      description='Flask Testing OpenShift App',
-      author='Dale Bewley',
-      author_email='dale@bewley.net',
+      description='Todo Application',
+      author='Shekhar Gulati',
+      author_email='',
       url='http://www.python.org/sigs/distutils-sig/',
-      install_requires=['Flask>=0.7.2', 'MarkupSafe', 'flask-wtf', 'flask-babel', 'markdown', 'flup'],
+     install_requires=['Flask>=0.7.2', 'MarkupSafe' , 'Flask-SQLAlchemy>=0.16'],
      )
