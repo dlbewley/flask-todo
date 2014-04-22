@@ -4,6 +4,7 @@ from flask import render_template
 from flask import request
 
 app = Flask(__name__)
+app.config['PROPAGATE_EXCEPTIONS'] = True
 
 #Create our index or root / route
 @app.route("/")
