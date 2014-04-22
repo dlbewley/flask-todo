@@ -79,7 +79,10 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % (self.username)
 
+
+ 
 @app.route('/')
+@login_required
 def index():
     return render_template('index.html',
         todos=Todo.query.order_by(Todo.pub_date.desc()).all()
@@ -87,6 +90,7 @@ def index():
 
 
 @app.route('/new', methods=['GET', 'POST'])
+@login_required
 def new():
     if request.method == 'POST':
         if not request.form['title']:
@@ -102,6 +106,7 @@ def new():
     return render_template('new.html')
 
 @app.route('/todos/<int:todo_id>', methods = ['GET' , 'POST'])
+@login_required
 def show_or_update(todo_id):
     todo_item = Todo.query.get(todo_id)
     if request.method == 'GET':
