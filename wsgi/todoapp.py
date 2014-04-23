@@ -1,4 +1,4 @@
-from flask import Flask, session, request, flash, url_for, redirect, render_template, abort 
+from flask import Flask, session, request, flash, url_for, redirect, render_template, abort, g
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -66,7 +66,7 @@ class User(db.Model):
 @app.before_request
 def before_request():
     g.user = current_user 
-    
+
 @app.route('/')
 #@login_required
 def index():
