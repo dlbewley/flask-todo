@@ -17,7 +17,7 @@ login_manager.login_view = 'login'
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
-    
+
 class Todo(db.Model):
     __tablename__ = 'todos'
     id            = db.Column('todo_id', db.Integer, primary_key=True)
@@ -113,7 +113,10 @@ def register():
 def login():
     if request.method == 'GET':
         return render_template('login.html')
-    return redirect(url_for('index'))
+    # login and validate the user...
+    login_user(user)
+    flash("Logged in successfully.")
+    return redirect(request.args.get("next") or url_for("index"))
 
 if __name__ == '__main__':
     app.run()
