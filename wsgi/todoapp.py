@@ -63,7 +63,10 @@ class User(db.Model):
         return '<User %r>' % (self.username)
 
 
- 
+@app.before_request
+def before_request():
+    g.user = current_user 
+    
 @app.route('/')
 #@login_required
 def index():
@@ -122,6 +125,11 @@ def login():
     login_user(registered_user)
     flash('Logged in successfully')
     return redirect(request.args.get('next') or url_for('index'))
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index')) 
 
 if __name__ == '__main__':
     app.run()
