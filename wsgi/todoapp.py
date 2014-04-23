@@ -14,6 +14,10 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+    
 class Todo(db.Model):
     __tablename__ = 'todos'
     id            = db.Column('todo_id', db.Integer, primary_key=True)
@@ -59,9 +63,6 @@ class User(db.Model):
         return '<User %r>' % (self.username)
 
 
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(int(id))
  
 @app.route('/')
 #@login_required
@@ -113,5 +114,6 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
     return redirect(url_for('index'))
+
 if __name__ == '__main__':
     app.run()
