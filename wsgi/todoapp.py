@@ -68,10 +68,10 @@ def before_request():
     g.user = current_user 
 
 @app.route('/')
-#@login_required
+@login_required
 def index():
     return render_template('index.html',
-        todos=Todo.query.order_by(Todo.pub_date.desc()).all()
+        todos=Todo.query.filter_by(user_id = g.user.id).order_by(Todo.pub_date.desc()).all()
     )
 
 @app.route('/new', methods=['GET', 'POST'])
@@ -84,6 +84,7 @@ def new():
             flash('Text is required', 'error')
         else:
             todo = Todo(request.form['title'], request.form['text'])
+            todo.user = g.user
             db.session.add(todo)
             db.session.commit()
             flash(u'Todo item was successfully created')
@@ -96,11 +97,14 @@ def show_or_update(todo_id):
     todo_item = Todo.query.get(todo_id)
     if request.method == 'GET':
         return render_template('view.html',todo=todo_item)
-    todo_item.title = request.form['title']
-    todo_item.text  = request.form['text']
-    todo_item.done  = ('done.%d' % todo_id) in request.form
-    db.session.commit()
-    return redirect(url_for('index'))
+    if todo_item.user.id == g.user.id:
+        todo_item.title = request.form['title']
+        todo_item.text  = request.form['text']
+        todo_item.done  = ('done.%d' % todo_id) in request.form
+        db.session.commit()
+        return redirect(url_for('index'))
+    flash('You are not authorized to edit this todo item','error')
+    return redirect(url_for('show_or_update',todo_id=todo_id))
 
 @app.route('/register', methods=['GET','POST'])
 def register():
