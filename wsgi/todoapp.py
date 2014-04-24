@@ -21,6 +21,7 @@ def load_user(id):
 class Todo(db.Model):
     __tablename__ = 'todos'
     id            = db.Column('todo_id', db.Integer, primary_key=True)
+    user_id       = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     title         = db.Column(db.String(60))
     text          = db.Column(db.String)
     done          = db.Column(db.Boolean)
@@ -35,11 +36,16 @@ class Todo(db.Model):
 
 class User(db.Model):
     __tablename__ = "users"
+ 
+class User(db.Model):
+    __tablename__ = "users"
     id            = db.Column('user_id', db.Integer, primary_key=True)
     username      = db.Column('username', db.String(20), unique=True, index=True)
     password      = db.Column('password', db.String(10))
     email         = db.Column('email', db.String(50), unique=True, index=True)
     registered_on = db.Column('registered_on', db.DateTime)
+
+    todos         = db.relationship('Todo', backref='user', lazy='dynamic')
  
     def __init__(self , username ,password , email):
         self.username      = username
