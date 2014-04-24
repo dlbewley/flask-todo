@@ -33,9 +33,6 @@ class Todo(db.Model):
         self.done     = False
         self.pub_date = datetime.utcnow()
 
-
-class User(db.Model):
-    __tablename__ = "users"
  
 class User(db.Model):
     __tablename__ = "users"
